@@ -80,3 +80,9 @@ const deleteNote = (id) => {
   notes.value = notes.value.filter((note) => note.id !== id);
 };
 </script>
+
+<style scoped>
+button.is-link[disabled] {
+  border-color: transparent;
+}
+</style>
