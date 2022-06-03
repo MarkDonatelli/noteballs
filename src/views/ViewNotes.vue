@@ -26,7 +26,7 @@
     </div>
     <!-- /.card has-background-success-dark -->
     <Note
-      @handleNoteDelete="deleteNote(note.id)"
+      @handleNoteDelete="deleteNote"
       v-for="note in notes"
       :key="note.id"
       :note="note"

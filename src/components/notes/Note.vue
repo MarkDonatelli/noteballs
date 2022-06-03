@@ -30,10 +30,6 @@ import { computed } from 'vue';
 
 const emit = defineEmits(['handleNoteDelete']);
 
-const handleNoteDelete = () => {
-  emit('handleNoteDelete');
-};
-
 /*
  props
 */
@@ -54,4 +50,12 @@ const characterLength = computed(() => {
   let description = length <= 1 ? 'character' : 'characters';
   return `${length} ${description}`;
 });
+
+/*
+ methods
+ */
+
+const handleNoteDelete = () => {
+  emit('handleNoteDelete', props.note.id);
+};
 </script>
