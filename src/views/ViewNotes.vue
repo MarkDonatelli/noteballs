@@ -25,12 +25,7 @@
       </div>
     </div>
     <!-- /.card has-background-success-dark -->
-    <Note
-      @handleNoteDelete="deleteNote"
-      v-for="note in notes"
-      :key="note.id"
-      :note="note"
-    />
+    <Note v-for="note in storeNotes.notes" :key="note.id" :note="note" />
   </div>
 </template>
 
@@ -41,6 +36,13 @@
 
 import { ref } from 'vue';
 import Note from '@/components/notes/Note.vue';
+import { useStoreNotes } from '@/stores/storeNotes';
+
+/*
+ store
+*/
+
+const storeNotes = useStoreNotes();
 
 /*
  notes
@@ -49,35 +51,10 @@ import Note from '@/components/notes/Note.vue';
 const newNote = ref('');
 const newNoteRef = ref(null);
 
-const notes = ref([
-  {
-    id: 'id1',
-    content: 'Content One',
-  },
-  {
-    id: 'id2',
-    content: 'Content Two',
-  },
-  {
-    id: 'id3',
-    content: 'Content Three',
-  },
-]);
-
 const addNote = () => {
-  let currentDate = new Date().getTime(),
-    id = currentDate.toString();
-  let note = {
-    id,
-    content: newNote.value,
-  };
-  notes.value.unshift(note);
+  storeNotes.addNote(newNote.value);
   newNote.value = '';
   newNoteRef.value.focus();
-};
-
-const deleteNote = (id) => {
-  notes.value = notes.value.filter((note) => note.id !== id);
 };
 </script>
 
