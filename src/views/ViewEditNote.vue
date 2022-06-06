@@ -11,6 +11,7 @@
           Cancel
         </button>
         <button
+          @click="handleSaveClicked"
           :disabled="!noteContent"
           class="button is-link has-background-link"
         >
@@ -26,8 +27,16 @@
  imports
 */
 import { ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import AddEditNote from '@/components/notes/AddEditNote.vue';
 import { useStoreNotes } from '@/stores/storeNotes';
+
+/*
+ router
+*/
+
+const route = useRoute();
+const router = useRouter();
 
 /*
  store
@@ -41,5 +50,14 @@ const storeNotes = useStoreNotes();
 
 const noteContent = ref('');
 
-noteContent.value = storeNotes.getNoteContent;
+noteContent.value = storeNotes.getNoteContent(route.params.id);
+
+/*
+save clicked
+*/
+
+const handleSaveClicked = () => {
+  storeNotes.updateNote(route.params.id, noteContent.value);
+  router.push('/');
+};
 </script>
