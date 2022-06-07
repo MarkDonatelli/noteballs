@@ -6,6 +6,7 @@
     <div class="field">
       <div class="control">
         <textarea
+          v-autofocus
           v-model="modelValue"
           @input="$emit('update:modelValue', modelValue)"
           class="textarea"
@@ -25,7 +26,13 @@
 </template>
 
 <script setup>
+/*
+ imports
+ */
+
 import { ref } from 'vue';
+import { vAutofocus } from '@/directives/vAutoFocus';
+
 /*
  props
 */
@@ -51,6 +58,7 @@ const props = defineProps({
 /*
  emits
  */
+
 const emit = defineEmits(['update:modelValue']);
 
 /*
