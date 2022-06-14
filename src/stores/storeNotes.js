@@ -2,8 +2,8 @@ import { defineStore } from 'pinia';
 import {
   collection,
   onSnapshot,
+  addDoc,
   doc,
-  setDoc,
   deleteDoc,
   updateDoc,
   query,
@@ -12,7 +12,7 @@ import {
 import { db } from '@/js/firebase';
 
 const notesCollectionRef = collection(db, 'notes');
-const notesCollectionQuery = query(notesCollectionRef, orderBy('id', 'desc'));
+const notesCollectionQuery = query(notesCollectionRef, orderBy('date', 'desc'));
 
 export const useStoreNotes = defineStore('storeNotes', {
   state: () => {
@@ -20,19 +20,23 @@ export const useStoreNotes = defineStore('storeNotes', {
       notes: [
         //coming from firebase dynamically
       ],
+      isLoading: false,
     };
   },
   actions: {
     async getNotes() {
       onSnapshot(notesCollectionQuery, (querySnapshot) => {
         let notes = [];
+        this.isLoading = false;
         querySnapshot.forEach((doc) => {
           let note = {
             id: doc.id,
             content: doc.data().content,
+            date: doc.data().date,
           };
           notes.push(note);
         });
+        this.isLoading = true;
         this.notes = notes;
       });
       //later on
@@ -40,11 +44,11 @@ export const useStoreNotes = defineStore('storeNotes', {
     },
     async addNote(newNoteContent) {
       let currentDate = new Date().getTime(),
-        id = currentDate.toString();
+        date = currentDate.toString();
 
-      await setDoc(doc(notesCollectionRef, id), {
+      await addDoc(notesCollectionRef, {
         content: newNoteContent,
-        id,
+        date,
       });
     },
     async deleteNote(id) {
