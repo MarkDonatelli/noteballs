@@ -23,6 +23,7 @@
       type="text"
       placeholder="Do you love noteballs?"
       v-model="statsInput"
+      v-autofocus
     />
   </div>
 </template>
@@ -32,7 +33,7 @@
  imports
 */
 import { ref } from 'vue';
-//vautofocus
+import { vAutofocus } from '@/directives/vAutoFocus';
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useWatchCharacters } from '@/use/useWatchCharacters';
 
