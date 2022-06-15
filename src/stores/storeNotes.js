@@ -20,14 +20,14 @@ export const useStoreNotes = defineStore('storeNotes', {
       notes: [
         //coming from firebase dynamically
       ],
-      isLoading: false,
+      notesLoaded: false,
     };
   },
   actions: {
     async getNotes() {
       onSnapshot(notesCollectionQuery, (querySnapshot) => {
         let notes = [];
-        this.isLoading = false;
+        this.notesLoaded = false;
         querySnapshot.forEach((doc) => {
           let note = {
             id: doc.id,
@@ -36,7 +36,7 @@ export const useStoreNotes = defineStore('storeNotes', {
           };
           notes.push(note);
         });
-        this.isLoading = true;
+        this.notesLoaded = true;
         this.notes = notes;
       });
       //later on
