@@ -32,7 +32,7 @@
  */
 
 import { ref } from 'vue';
-import { vAutofocus } from '@/directives/vAutoFocus.js';
+import { vAutofocus } from '@/directives/vAutoFocus';
 /*
  props
 */
