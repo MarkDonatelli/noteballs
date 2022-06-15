@@ -33,7 +33,7 @@
  imports
 */
 import { ref } from 'vue';
-import { vAutofocus } from '@/directives/vAutoFocus';
+import { vAutofocus } from '@/directives/vAutoFocus.js';
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useWatchCharacters } from '@/use/useWatchCharacters';
 
