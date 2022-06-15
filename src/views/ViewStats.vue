@@ -19,7 +19,6 @@
       </tbody>
     </table>
     <input
-      v-autofocus
       class="input"
       type="text"
       placeholder="Do you love noteballs?"
@@ -33,7 +32,7 @@
  imports
 */
 import { ref } from 'vue';
-import { vAutofocus } from '@/directives/vAutoFocus';
+//vautofocus
 import { useStoreNotes } from '@/stores/storeNotes';
 import { useWatchCharacters } from '@/use/useWatchCharacters';
 
